@@ -1,0 +1,16 @@
+---
+
+# Playbook para instalar nginx en un servidor
+# uso de become para ejecutar como root
+# ansible-playbook playbook-3.yml
+
+- name: Ansible Facts
+  hosts: prueba
+  # become: yes
+
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: prensent
+      become: yes

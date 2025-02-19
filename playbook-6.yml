@@ -1,0 +1,17 @@
+---
+
+# Playbook para probar la carga de variables desde un archivo externo
+# Se carga el archivo secrets.yml que contiene la variable password
+# ansible vault create secrets.yml
+# ansible-playbook playbook-6.yml
+
+- name: Primer playbook
+  hosts: prueba
+
+  vars_files:
+    - secrets.yml
+
+  tasks:
+    - name: Debung secret variable
+      debug:
+        msg: "{{ password }}"

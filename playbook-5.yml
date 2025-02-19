@@ -1,0 +1,23 @@
+---
+
+# Playbook uso de handlers
+# ansible-playbook playbook-5.yml
+
+- name: Ansible Facts
+  hosts: prueba
+  # become: yes
+
+  tasks:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: absent
+      become: yes
+      notify: restart nginx
+  
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+      become: yes

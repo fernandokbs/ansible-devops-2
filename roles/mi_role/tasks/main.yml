@@ -1,0 +1,29 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for mi_role
+
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Start nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Subir el Virtual Host de Nginx
+  template:
+    src: config.j2
+    dest: "/etc/nginx/sites-available/default"
+  notify: Reiniciar Nginx
+
+- name: Copiar el archivo index.html
+  copy:
+    src: index.html
+    dest: "{{ nginx_root }}/index.html"
+    owner: www-data
+    group: www-data
+    mode: '0644'

@@ -1,0 +1,24 @@
+---
+
+# Ejemplo de playbook, usando variables y bucles
+# ansible-playbook playbook-1.yml
+
+- name: Primer playbook
+  hosts: prueba
+
+  vars:
+    nombre: "hola"
+    lenguajes:
+      - ruby
+      - python
+      - php
+
+  tasks:
+    - name: Ping
+      ping:
+
+    - name: Create file
+      file:
+        path: /home/ubuntu/{{ item }}.txt
+        state: touch
+      with_items: "{{ lenguajes }}"

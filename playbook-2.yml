@@ -1,0 +1,27 @@
+---
+
+# Ejemplo de playbook, uso de debug, codicionales y facts
+# ansible-playbook playbook-2.yml
+
+- name: Ansible Facts
+  # gather_facts: no # Deshabilita la recoleccion de datos
+  hosts: prueba
+
+  tasks:
+    - name: Debug
+      debug:
+        msg: "Hola mundo"
+
+    - name: Print hostname
+      debug:
+        msg: "Hostname: {{ ansible_distribution }}"
+
+    - name: Debug no se ejecuta por condicion
+      debug:
+        msg: "Debug no se ejecuta por condicion"
+      when: ansible_distribution == "Centos"
+
+    - name: Debug si se ejecuta por condicion
+      debug:
+        msg: "Debug si se ejecuta por condicion"
+      when: ansible_distribution in ['Centos', 'Ubuntu']

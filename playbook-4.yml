@@ -1,0 +1,22 @@
+---
+
+# Playbook para el uso de templates
+# ansible-playbook playbook-4.yml
+
+- name: Ansible Facts
+  hosts: prueba
+  become: yes
+
+  vars:
+    lenguajes:
+      - Ruby
+      - PHP
+      - Python
+      - Javascript
+      - GO
+
+  tasks:
+    - name: Template
+      template:
+        src: ./templates/template.j2
+        dest: /home/ubuntu/template.txt

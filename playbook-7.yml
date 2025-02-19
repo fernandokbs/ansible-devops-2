@@ -1,0 +1,11 @@
+---
+
+# Playbook para ejecutar un rol
+# ansible-playbook playbook-7.yml
+
+- name: Primer playbook
+  hosts: prueba
+  become: true
+
+  roles:
+    - role: roles/mi_role
